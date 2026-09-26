@@ -1,0 +1,10 @@
+# B2 gravity calibration, GY-521 #1, 2026-09-26 ~12:30 ICT
+# Values read by eye from Arduino Serial Monitor (approximate). Units: counts, 16384 per g at +/-2 g.
+# right_of_pins_down ay corrected to +16100 by Captain 12:41 (first report of -16600 was a transcription slip; ax, az as first reported).
+orientation,ax,ay,az
+flat,100,-150,15000
+upside_down,150,-150,-18100
+left_of_pins_down,150,-16600,-1600
+pin_side_down,16300,-350,-4500
+right_of_pins_down,200,16100,-1500
+opposite_pin_side_down,-16100,-300,-5000
