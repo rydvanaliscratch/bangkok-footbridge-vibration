@@ -1,8 +1,17 @@
-# How to record (quick card)
+# How to record and analyse (quick card)
 
-## Before
+Full explanations: "The Complete Study Guide" (Claude doc).
+
+## Once only
+```
+cd ~/Desktop/bangkok-footbridge-vibration
+python3 -m pip install -r requirements.txt
+python3 analysis/selftest.py          # must say ALL PASS
+```
+
+## Before every recording
 - Board fixed so it can't rock. Uno plugged in by USB; sensor LED on.
-- Arduino IDE Serial Monitor **closed**.
+- Arduino IDE Serial Monitor **closed**. Laptop lid open (closing it stops the recording).
 
 ## Record
 ```
@@ -10,21 +19,29 @@ cd ~/Desktop/bangkok-footbridge-vibration
 python3 analysis/capture.py SITE RUN SECONDS
 ```
 - SITE: `bench` at home, or the bridge ID from `data/bridges.csv` (`bridge01` ...)
-- RUN: `rest` (still, B3/B4) · `tilt` (B2) · `pendulum` (B5) · `ambient` (midspan, 900 s) · `decay` (heel-drops, 300 s) · `control` (pavement, 300 s) · `remount`
-- Files are named automatically `YYYYMMDD_HHMM_SITE_RUN.csv`: bench -> `data/calibration/`, bridges -> `data/raw/`. **Never rename or edit them.**
+- RUN: `rest` (B3/B4) · `tilt` (B2) · `pendulum` (B5) · `ambient` (900) · `decay` (300) · `control` (300) · `remount`
+- Files name themselves `YYYYMMDD_HHMM_SITE_RUN.csv`. **Never rename or edit them.**
 
-## Check a bench `rest` recording (B3 + B4)
-```
-python3 analysis/bench_checks.py data/calibration/<file>.csv
-```
+## Analyse
+| What | Command |
+| --- | --- |
+| B3 + B4 (bench rest) | `python3 analysis/bench_checks.py data/calibration/<file>.csv` |
+| B5 (pendulum) | `python3 analysis/pendulum_check.py data/calibration/<file>.csv` |
+| One bridge, everything | `python3 analysis/analyse_bridge.py bridge01` |
+| Just a spectrum | `python3 analysis/spectrum.py <file>.csv --control <ground>.csv` |
+| Just damping | `python3 analysis/damping.py <decay>.csv --f 3.2` |
+| Span test (3+ bridges) | `python3 analysis/span_fit.py` |
+
+Results are added automatically to `results/*.csv`; pictures go to `figures/`.
 
 ## After every session
-1. Three lines in `docs/build-log.md` (date, files, what happened).
-2. Save:
+1. `data/sessions.csv`: one row per recording (field days).
+2. `docs/build-log.md`: three lines (date, files, what happened and the key numbers).
+3. Save:
 ```
 git add .
 git commit -m "what happened"
 git push
 ```
 
-Keys: Up arrow = previous command · Tab = complete a file name · Control+C = stop recording early (keeps what was saved).
+Keys: Up arrow = previous command · Tab = complete a file name · Control+C = stop early (keeps what was saved).
