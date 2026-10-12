@@ -56,6 +56,20 @@ methods section trivial instead of an act of reconstruction.
 - Choices that are ours, not from a standard, and must be stated in Methods: 4096-sample pieces; bootstrap over overlapping pieces (range may be slightly narrow); band-pass 0.7–1.3 f; heel-drop = burst > 8× typical level; stop decay at 3× background; proposed ground rule: bridge peak ≥ 10× ground. Decide the ground rule before field day 1.
 - Templates added: `data/bridges.csv`, `data/sessions.csv`, `predictions/predictions-template.csv`, `requirements.txt`.
 
+## 2026-10-09 — first upload to GitHub
+
+- The 26 Sep snapshot (first B1–B4 run) was committed on this Mac on 26 Sep but first uploaded to GitHub on 9 Oct, together with the analysis-programs snapshot. Local commit dates are set by the computer's clock; GitHub's record starts 9 Oct.
+- Before the rerun, B1–B4 were repeated from the start (below) to check that the instrument gives the same results twice.
+
+## 2026-10-12 — B1 rerun, I2C connection
+
+- Program: `firmware/i2c_scanner/i2c_scanner.ino` (written by Claude at Rydvan's request; scans addresses 1–126, then reads WHO_AM_I, register 0x75). Uploaded to the Uno; Serial Monitor at 115200 baud.
+- Known answer: one device at 0x68; WHO_AM_I = 0x68.
+- Attempt 1: **FAIL**. "Devices found: 0", "WHO_AM_I: no reply from 0x68". The Uno printed normally, so USB, board and program were working. Sensor LED lit, so VCC/GND had power. Wiring checked: SDA→A4, SCL→A5, correct.
+- Cause found by inspection: the solder on the sensor's SDA pin had lifted off the copper pad (a cold joint, as VCC/GND were on 26 Sep). Re-soldered SDA with the USB unplugged.
+- Attempt 2: "Device found at 0x68", "Devices found: 1", "WHO_AM_I = 0x68 (correct: MPU-6050)".
+- Result: **PASS** after repair. Lesson: joints can fail after handling; repeat B1 before every field day.
+
 ## 2026-09-__ — B5, pendulum validation
 
 - String length ____ m, predicted f = ____ Hz from T = 2π√(L/g)
