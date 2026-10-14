@@ -19,7 +19,7 @@ import damping
 import spectrum
 
 RAW = Path("data/raw")
-GROUND_RULE = 10        # proposed: bridge peak >= 10x the ground's at that frequency
+GROUND_RULE = 10        # fixed 14 Oct 2026 (predictions file): bridge peak >= 10x the ground's power at that frequency
 
 
 def newest(site, run):
