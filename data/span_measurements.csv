@@ -1,0 +1,19 @@
+# Raw span readings from scouting. Every reading is kept, including ones judged unreliable (see notes).
+# candidate = scouting label (A, B, C, D); final bridge IDs (bridge01..bridge08) are assigned in data/bridges.csv.
+# what_measured: "outer-outer" = outer face of one support column to outer face of the other;
+#                "end-middle"  = outer face of an end column to the near face of the middle column.
+date,candidate,road_lanes,middle_column,method,reading_m,what_measured,notes
+2026-10-13,A,6,no,iPhone Measure app (walked fast),24.2,outer-outer,
+2026-10-13,A,6,no,iPhone Measure app (walked fast),24.4,outer-outer,re-measure walking slowly planned
+2026-10-13,A,6,no,Apple Maps measure,25,outer-outer,map shows whole metres; column faces hard to see from above
+2026-10-13,B,6,no,iPhone Measure app,22.7,outer-outer,phone overheating; app not locking onto surface - unreliable
+2026-10-13,B,6,no,iPhone Measure app,23.4,outer-outer,phone overheating; app not locking onto surface - unreliable
+2026-10-13,B,6,no,Apple Maps measure,20,outer-outer,click points uncertain; disagrees with iPhone by 3 m - re-measure B
+2026-10-13,C,6,no,iPhone Measure app (walked slowly),25.4,outer-outer,
+2026-10-13,C,6,no,iPhone Measure app (walked slowly),25.4,outer-outer,
+2026-10-13,C,6,no,Apple Maps measure,25,outer-outer,
+2026-10-13,D,8,yes,iPhone Measure app,34,outer-outer (whole bridge),total length across both spans - not the span
+2026-10-13,D,8,yes,iPhone Measure app,34,outer-outer (whole bridge),total length across both spans - not the span
+2026-10-13,D,8,yes,Apple Maps measure,30-40,outer-outer (whole bridge),reading jumped between 30 and 40 with click position - not used
+2026-10-13,D,8,yes,iPhone Measure app,17,end-middle (side 1),span 1
+2026-10-13,D,8,yes,iPhone Measure app,17,end-middle (side 2),span 2
