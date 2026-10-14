@@ -102,6 +102,13 @@ methods section trivial instead of an act of reconstruction.
 - Result: **PASS**. The SDA joint re-soldered on 12 Oct holds.
 - Also this morning: the project's GitHub address had changed to SSH (git@github.com) and asked for an SSH-key passphrase; set back to https with `git remote set-url`, push worked with the token.
 
+## 2026-10-14 — B3 + B4 on the new Mac
+
+- Recording `data/calibration/20261014_1003_bench_rest.csv`: 60 s, sensor flat on its tile, run as `caffeinate -i python3 analysis/capture.py bench rest 60`; port found automatically (/dev/cu.usbmodem21101). 12,026 samples, 60.12 s, 1 non-data line (Uno restart bytes).
+- B4: median gap 5000.0 µs, 100.00 % within ±500 µs, smallest/largest 4992/5008 µs, 0 dropped, 200.000 Hz. **PASS**. Histogram `figures/B4_gaps_20261014_1003_bench_rest.png`.
+- B3: SD x 16.5, y 16.7, z 26.2 counts (z = 1.60 mg). **PASS** (< 60). 26 Sep: z SD 26.3, so the noise floor repeats.
+- Not expected: mean readings flat have changed since 26 Sep: x −159 (was +309), y +103 (was −232), z 16,675 (was 14,969). Either a different board or the 12 Oct re-soldering shifted the offsets (soldering stress can). Does not affect frequency or damping (mean removed in analysis). B2 tonight measures the new offsets; board identity to be confirmed by Rydvan.
+
 ## 2026-09-__ — B5, pendulum validation
 
 - String length ____ m, predicted f = ____ Hz from T = 2π√(L/g)
