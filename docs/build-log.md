@@ -95,6 +95,13 @@ methods section trivial instead of an act of reconstruction.
 - Field recordings are run as `caffeinate -i python3 analysis/capture.py ...` so the Mac cannot sleep on battery during a 15-minute recording.
 - Order of gates today: B1 and B3+B4 before the bridges (new Mac, recent solder repair); B2 and B5 the same evening, with the same sensor, wiring and Mac, unchanged in between.
 
+## 2026-10-14 — B1 on the new Mac
+
+- First compile failed: "avr-g++: bad CPU type in executable" (Rosetta not installed on the new Apple-silicon Mac; same fault as on the old Mac). Fixed with `softwareupdate --install-rosetta --agree-to-license`.
+- Scanner (`firmware/i2c_scanner/i2c_scanner.ino`): "Device found at 0x68", "Devices found: 1", "WHO_AM_I = 0x68 (correct: MPU-6050)".
+- Result: **PASS**. The SDA joint re-soldered on 12 Oct holds.
+- Also this morning: the project's GitHub address had changed to SSH (git@github.com) and asked for an SSH-key passphrase; set back to https with `git remote set-url`, push worked with the token.
+
 ## 2026-09-__ — B5, pendulum validation
 
 - String length ____ m, predicted f = ____ Hz from T = 2π√(L/g)
