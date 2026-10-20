@@ -12,14 +12,17 @@ axes between 0.3 and 5 Hz. The axis across the swing sees the swing
 itself at f; the axis along the string sees the string's pull, which
 peaks twice per swing, at 2f.
 
-PASS: some axis peaks within +/-0.05 Hz of f, and some axis peaks
+PASS (A): some axis peaks within +/-0.05 Hz of f, and some axis peaks
 within +/-0.10 Hz of 2f.
+If A is not met, pass B (pendulum_ringdown.py) times each swing; the rule
+for B was written before run 2 was looked at (docs/build-log.md).
 """
 
 import argparse
 import math
 
 import common
+import pendulum_ringdown
 import spectrum
 
 TOL_F = 0.05
@@ -45,9 +48,16 @@ def main():
     ok = bool(hit_f) and bool(hit_2f)
     print(f"\n  swing peak at f within +/-{TOL_F} Hz on axis: {', '.join(hit_f) or 'none'}")
     print(f"  string-pull peak at 2f within +/-{TOL_2F} Hz on axis: {', '.join(hit_2f) or 'none'}")
-    print(f"  RESULT: {'PASS' if ok else 'FAIL'}")
-    if not ok:
-        print("  If no axis is near f: was the swing small and steady, and the rate taken from the file?")
+    if ok:
+        print("  RESULT: PASS (A, strict spectrum check)")
+        return
+    print("  Pass A not met. Trying pass B, which times each swing (rule in docs/build-log.md):\n")
+    b = pendulum_ringdown.analyse(a.recording, a.length)
+    if b["passed"]:
+        print("  RESULT: PASS (B, short ringdown) - the paper must state how short the swing was")
+    else:
+        print("  RESULT: FAIL")
+        print("  If no axis is near f: was the swing steady, and was --length the measured length?")
 
 
 if __name__ == "__main__":

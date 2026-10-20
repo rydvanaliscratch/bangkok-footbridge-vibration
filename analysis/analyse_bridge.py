@@ -30,6 +30,8 @@ def newest(site, run):
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("site", help="bridge ID as used when recording, e.g. bridge01")
+    p.add_argument("--axis", default="z", choices=["x", "y", "z"],
+                   help="the axis pointing straight up on the bridge (z if the board lies flat)")
     p.add_argument("--fmin", type=float, default=1.0)
     p.add_argument("--fmax", type=float, default=20.0)
     a = p.parse_args()
@@ -43,13 +45,13 @@ def main():
         sys.exit("No ambient recording - nothing to analyse.")
 
     print("=== 1. Natural frequency (ambient vs ground) ===")
-    r = spectrum.analyse(amb, fmin=a.fmin, fmax=a.fmax, control=ctl)
+    r = spectrum.analyse(amb, axis=a.axis, fmin=a.fmin, fmax=a.fmax, control=ctl)
     f = r["f_peak_hz"]
 
     print("\n=== 2. Damping (heel-drops) ===")
     summ = None
     if dec:
-        summ, _ = damping.analyse(dec, f)
+        summ, _ = damping.analyse(dec, f, axis=a.axis)
     else:
         print("  no decay recording")
 
@@ -61,7 +63,7 @@ def main():
         ratio = r["bridge_to_ground_ratio"]
         verdict = "belongs to the bridge" if ratio >= GROUND_RULE else "is NOT clearly the bridge's - check the figure"
         print(f"  On the bridge that peak is {ratio}x stronger than on the ground, so it {verdict} "
-              f"(proposed rule: at least {GROUND_RULE}x).")
+              f"(rule fixed before data: at least {GROUND_RULE}x).")
     else:
         print("  No ground control: the peak cannot be confirmed as the bridge's.")
     if summ:

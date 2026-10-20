@@ -21,23 +21,36 @@ AXES = {"x": 1, "y": 2, "z": 3}
 def load(path):
     """Read a recording. Returns (t_us, ax, ay, az, not_data).
 
-    Skips '#' notes and the 't_us,ax,ay,az' title line. Lines that are
-    not four whole numbers (e.g. junk while the Uno restarts) are
-    counted in not_data, never silently dropped.
+    Data starts after the 't_us,ax,ay,az' title line. Anything above it is
+    left over from the Uno's previous run (it keeps streaming until the
+    port is reopened and it restarts) and is not part of this recording:
+    it is counted in not_data, never silently dropped. A file with no
+    title line is read from the top, as before.
+
+    Skips '#' notes. Lines that are not four whole numbers (e.g. junk
+    while the Uno restarts) are also counted in not_data.
     """
-    rows, not_data = [], 0
     with open(path, encoding="ascii", errors="replace") as f:
-        for line in f:
-            line = line.strip()
-            if line == "" or line.startswith("#") or line.startswith("t_us"):
-                continue
-            parts = line.split(",")
-            try:
-                if len(parts) != 4:
-                    raise ValueError
-                rows.append([int(p) for p in parts])
-            except ValueError:
-                not_data += 1
+        lines = [ln.strip() for ln in f]
+    start = 0
+    for i, ln in enumerate(lines):
+        if ln.startswith("t_us"):
+            start = i + 1
+            break
+    rows, not_data = [], 0
+    for i, line in enumerate(lines):
+        if line == "" or line.startswith("#") or line.startswith("t_us"):
+            continue
+        if i < start:
+            not_data += 1                       # stale line from before the restart
+            continue
+        parts = line.split(",")
+        try:
+            if len(parts) != 4:
+                raise ValueError
+            rows.append([int(p) for p in parts])
+        except ValueError:
+            not_data += 1
     if not rows:
         raise SystemExit(f"{path}: no data lines found")
     d = np.array(rows, dtype=np.int64)

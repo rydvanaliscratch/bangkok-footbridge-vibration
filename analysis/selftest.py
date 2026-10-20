@@ -12,6 +12,9 @@ checks the answers:
   - a ground recording with traffic rumble but no bridge
   - ten heel-drops on that bridge
   - a 25 cm pendulum (0.997 Hz swing, 1.994 Hz string pull)
+  - short pendulum swings, for B5 pass B (timing each swing): one at the
+    right frequency, one at the wrong frequency, one of only 2 swings,
+    and pure noise
   - five bridges whose frequency follows span^-1.6 exactly
 
 The fake bridge is a textbook resonator whose damping is known exactly,
@@ -135,6 +138,33 @@ def main():
             pendulum_check.main()
         check("pendulum B5", "RESULT: PASS" in buf.getvalue(),
               [l.strip() for l in buf.getvalue().splitlines() if "axis" in l and "peak" in l][0])
+
+        # B5 pass B: short ringdowns with known answers
+        import pendulum_ringdown
+        def short_swing(f, tau, t0=8.0, amp=0.05, n=int(40 * RATE)):
+            t = np.arange(n) / RATE
+            s = np.zeros(n)
+            m = t >= t0
+            s[m] = amp * np.exp(-(t[m] - t0) / tau) * np.sin(2 * math.pi * f * (t[m] - t0))
+            return s
+        def ringdown(name, sig):
+            pth = Path(f"data/calibration/{name}.csv")
+            write(pth, z_g=sig, x_g=1.6 * sig)
+            with contextlib.redirect_stdout(quiet):
+                return pendulum_ringdown.analyse(pth, 0.25)
+        r1 = ringdown("20261004_1100_bench_pendulum", short_swing(fp, 2.0))
+        a1 = r1["axes"][r1["best_axis"]] if r1["passed"] else {}
+        check("pendulum pass B finds a short swing", r1["passed"] and abs(a1["f_hz"] - fp) < 0.02,
+              f"{a1.get('cycles')} swings, {a1.get('f_hz', 0):.3f} Hz, true {fp:.3f} Hz")
+        r2 = ringdown("20261004_1101_bench_pendulum", short_swing(1.2, 3.0))
+        check("pendulum pass B rejects the wrong frequency", not r2["passed"],
+              f"swing at 1.2 Hz timed as {r2['axes']['z'].get('f_hz', 0):.3f} Hz, theory {fp:.3f} Hz")
+        r3 = ringdown("20261004_1102_bench_pendulum", short_swing(fp, 0.4))
+        check("pendulum pass B needs 5 swings", not r3["passed"],
+              f"only {max(a['cycles'] for a in r3['axes'].values())} clean swing(s) found")
+        r4 = ringdown("20261004_1103_bench_pendulum", np.zeros(int(40 * RATE)))
+        check("pendulum pass B does not find swings in noise", not r4["passed"],
+              f"{max(a['cycles'] for a in r4['axes'].values())} swing(s) in pure noise")
 
         spans = [14.0, 19.0, 24.0, 31.0, 40.0]
         with open("data/bridges.csv", "w") as f:
