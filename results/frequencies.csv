@@ -11,3 +11,4 @@ analysed_at,code_version,file,date,time,site,run,axis,n_samples,rate_hz,dropped_
 2026-10-20T10:00:00,d556ca3+uncommitted,20261020_0958_bench_pendulum.csv,20261020,0958,bench,pendulum,x,6031,200.0,0,1,0.0488,1.161,1.161,1.161,0.8611,,,figures/spectrum_20261020_0958_bench_pendulum_x.png
 2026-10-20T10:00:00,d556ca3+uncommitted,20261020_0958_bench_pendulum.csv,20261020,0958,bench,pendulum,y,6031,200.0,0,1,0.0488,1.16,1.16,1.16,0.8622,,,figures/spectrum_20261020_0958_bench_pendulum_y.png
 2026-10-20T10:00:00,d556ca3+uncommitted,20261020_0958_bench_pendulum.csv,20261020,0958,bench,pendulum,z,6031,200.0,0,1,0.0488,1.169,1.169,1.169,0.8554,,,figures/spectrum_20261020_0958_bench_pendulum_z.png
+2026-10-20T08:44:16,8b6b831+uncommitted,20261020_1437_bridge01_ambient.csv,20261020,1437,bridge01,ambient,x,179864,200.0,0,86,0.0488,5.187,5.178,5.201,0.1928,20261020_1538_bridge01_control.csv,113.0,figures/spectrum_20261020_1437_bridge01_ambient_x.png

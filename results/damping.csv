@@ -1,0 +1,2 @@
+analysed_at,code_version,file,date,time,site,run,axis,f_used_hz,drop,time_s,usable,n_peaks,f_ring_hz,log_decrement,zeta_percent,fit_r2
+2026-10-20T08:44:16,8b6b831+uncommitted,20261020_1510_bridge01_decay.csv,20261020,1510,bridge01,decay,x,5.187,1,212.9,False,,,,,

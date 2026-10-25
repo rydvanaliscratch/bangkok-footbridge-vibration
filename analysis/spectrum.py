@@ -61,7 +61,7 @@ def peak(freqs, psd, fmin, fmax):
 
 
 def analyse(path, axis="z", fmin=1.0, fmax=20.0, control=None, nperseg=NPERSEG,
-            save=True, quiet=False):
+            save=True, quiet=False, control_axis=None):
     sig, rate, info = common.axis_in_g(path, axis)
     freqs, P = pieces(sig, rate, nperseg)
     psd = P.mean(axis=0)
@@ -83,7 +83,9 @@ def analyse(path, axis="z", fmin=1.0, fmax=20.0, control=None, nperseg=NPERSEG,
 
     c_psd = None
     if control:
-        csig, crate, cinfo = common.axis_in_g(control, axis)
+        # the ground is compared on ITS vertical axis, which need not be the
+        # same letter as the bridge's if the board was mounted differently
+        csig, crate, cinfo = common.axis_in_g(control, control_axis or axis)
         cf, CP = pieces(csig, crate, nperseg)
         c_psd = np.interp(freqs, cf, CP.mean(axis=0))
         # compare power within +/-1 bin of the bridge peak
@@ -137,11 +139,13 @@ def main():
     p.add_argument("recording")
     p.add_argument("--control", help="ground-control recording from the same bridge")
     p.add_argument("--axis", default="z", choices=["x", "y", "z"])
+    p.add_argument("--control-axis", default=None, choices=["x", "y", "z"],
+                   help="vertical axis of the ground recording if mounted differently (default: same as --axis)")
     p.add_argument("--fmin", type=float, default=1.0)
     p.add_argument("--fmax", type=float, default=20.0)
     p.add_argument("--nperseg", type=int, default=NPERSEG)
     a = p.parse_args()
-    analyse(a.recording, a.axis, a.fmin, a.fmax, a.control, a.nperseg)
+    analyse(a.recording, a.axis, a.fmin, a.fmax, a.control, a.nperseg, control_axis=a.control_axis)
 
 
 if __name__ == "__main__":

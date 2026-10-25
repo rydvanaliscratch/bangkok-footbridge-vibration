@@ -32,11 +32,20 @@ def main():
     p.add_argument("site", help="bridge ID as used when recording, e.g. bridge01")
     p.add_argument("--axis", default="z", choices=["x", "y", "z"],
                    help="the axis pointing straight up on the bridge (z if the board lies flat)")
+    p.add_argument("--control-axis", default=None, choices=["x", "y", "z"],
+                   help="vertical axis of the ground recording if the board was mounted differently "
+                        "(default: same as --axis)")
+    p.add_argument("--ambient", help="use this ambient file instead of the newest one")
+    p.add_argument("--control", help="use this control file instead of the newest one")
+    p.add_argument("--decay", help="use this decay file instead of the newest one")
     p.add_argument("--fmin", type=float, default=1.0)
     p.add_argument("--fmax", type=float, default=20.0)
     a = p.parse_args()
 
     amb, ctl, dec = (newest(a.site, r) for r in ("ambient", "control", "decay"))
+    amb = Path(a.ambient) if a.ambient else amb      # a stray short file can be the newest: name the real one
+    ctl = Path(a.control) if a.control else ctl
+    dec = Path(a.decay) if a.decay else dec
     print(f"Bridge {a.site}")
     print(f"  ambient: {amb.name if amb else 'MISSING'}")
     print(f"  control: {ctl.name if ctl else 'MISSING'}")
@@ -45,7 +54,7 @@ def main():
         sys.exit("No ambient recording - nothing to analyse.")
 
     print("=== 1. Natural frequency (ambient vs ground) ===")
-    r = spectrum.analyse(amb, axis=a.axis, fmin=a.fmin, fmax=a.fmax, control=ctl)
+    r = spectrum.analyse(amb, axis=a.axis, fmin=a.fmin, fmax=a.fmax, control=ctl, control_axis=a.control_axis)
     f = r["f_peak_hz"]
 
     print("\n=== 2. Damping (heel-drops) ===")
