@@ -10,8 +10,13 @@ What it does, in order:
  2. Band-pass filter from 0.7f to 1.3f (4th-order Butterworth, run
     forwards and backwards so it adds no delay). This keeps the bridge's
     own bounce and removes footsteps, traffic rumble and sensor hiss.
- 3. Finds each heel-drop: a burst more than 8x the recording's typical
-    level, at least 10 s after the previous one.
+ 3. Finds each heel-drop: a burst in the BAND-PASSED signal more than 8x
+    its typical level, at least 10 s after the previous one.
+    (Changed 26 Oct 2026, after seeing the data: the first version looked
+    for the burst in the raw signal, where walking, traffic and board
+    drift hid most drops. The factor 8 and all other constants are
+    unchanged. The old rule's drop count is still printed for comparison.
+    See docs/build-log.md.)
  4. For each drop, starts 0.5 s after the burst (the drop itself is
     over by then) and collects the successive positive peaks of the
     ringing, stopping when they sink into the background (3x its level)
@@ -44,10 +49,14 @@ def bandpass(sig, rate, f):
     return signal.sosfiltfilt(sos, sig)
 
 
-def find_drops(raw, rate):
-    """Sample indices of heel-drop bursts."""
-    level = np.median(np.abs(raw)) / 0.6745          # robust typical level
-    loud = np.where(np.abs(raw) > EVENT_FACTOR * level)[0]
+def find_drops(sig, rate):
+    """Sample indices of heel-drop bursts in the given signal.
+
+    Current rule: pass the band-passed signal. The original (raw-signal)
+    rule is the same function called with the raw signal.
+    """
+    level = np.median(np.abs(sig)) / 0.6745          # robust typical level
+    loud = np.where(np.abs(sig) > EVENT_FACTOR * level)[0]
     drops, last = [], -np.inf
     for i in loud:
         if i - last > MIN_GAP_S * rate:
@@ -85,7 +94,8 @@ def one_decay(bp, rate, f, start, stop, background):
 def analyse(path, f, axis="z", save=True, quiet=False):
     raw, rate, info = common.axis_in_g(path, axis)
     bp = bandpass(raw, rate, f)
-    drops = find_drops(raw, rate)
+    drops = find_drops(bp, rate)            # current rule (band-passed)
+    old_drops = find_drops(raw, rate)       # original rule, for comparison only
     results = []
     for j, d in enumerate(drops):
         start = d + int(SKIP_S * rate)
@@ -99,7 +109,8 @@ def analyse(path, f, axis="z", save=True, quiet=False):
     if not quiet:
         print(f"File: {info['file']}   axis {axis}   measured rate {rate:.3f} Hz   "
               f"band-pass {0.7 * f:.2f}-{1.3 * f:.2f} Hz")
-        print(f"Heel-drops found: {len(drops)}   usable: {len(good)}")
+        print(f"Heel-drops found: {len(drops)}   usable: {len(good)}   "
+              f"(original raw-signal rule would find {len(old_drops)})")
         for k, (d, r) in enumerate(results, 1):
             t = d / rate
             if r is None:
