@@ -17,3 +17,10 @@ date,candidate,road_lanes,middle_column,method,reading_m,what_measured,notes
 2026-10-13,D,8,yes,Apple Maps measure,30-40,outer-outer (whole bridge),reading jumped between 30 and 40 with click position - not used
 2026-10-13,D,8,yes,iPhone Measure app,17,end-middle (side 1),span 1
 2026-10-13,D,8,yes,iPhone Measure app,17,end-middle (side 2),span 2
+# --- 10 Nov 2026: paced spans (Rydvan). Foot+shoe length calibrated at 30 cm (repeated checks). Three passes each, same count every time. Outer-outer = inner + 0.6 m (his statement). Column width taken as 30 cm for all columns. Definition for the fit: INNER-INNER (clear span), fixed and logged before any span fit.
+2026-11-10,bridge01,8,yes,paced 30 cm foot (3 passes),17.68,inner-inner,"59 feet minus 2 cm; outer-outer about 18.28 (inner + 0.6); middle column; end-middle side"
+2026-11-10,bridge02,8,yes,paced 30 cm foot (3 passes),16.80,inner-inner,"56 feet; outer-outer about 17.40; middle column"
+2026-11-10,bridge03,6,no,paced 30 cm foot (3 passes),24.25,inner-inner,"81 feet minus 5 cm; outer-outer about 24.85; sidewalk longer than bridge05's per Rydvan"
+2026-11-10,bridge04,6,no,paced 30 cm foot (3 passes),25.73,inner-inner,"86 feet minus 7 cm; outer-outer about 26.33; earlier hot-phone readings 25.6 (not trusted)"
+2026-11-03,bridge05,6,no,paced 30 cm foot (3 passes),22.80,inner-inner,"76 feet; outer-outer 23.4 (his reading); earlier readings 23, 22.5 (tape/phone)"
+2026-11-10,bridge06,6,no,paced 30 cm foot (3 passes),25.55,inner-inner,"85 feet plus 5 cm; outer-outer about 26.15; earlier hot-phone reading 25.6"

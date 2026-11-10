@@ -1,1 +1,7 @@
 bridge_id,road,latitude,longitude,span_m,n_supports,deck_width_m,structure_type,deck_finish,underside_photo,notes
+bridge01,,,,17.68,,,,,,span = inner-inner paced 30 cm foot (see span_measurements.csv); other fields still to fill
+bridge02,,,,16.8,,,,,,span = inner-inner paced 30 cm foot (see span_measurements.csv); other fields still to fill
+bridge03,,,,24.25,,,,,,span = inner-inner paced 30 cm foot (see span_measurements.csv); other fields still to fill
+bridge04,,,,25.73,,,,,,span = inner-inner paced 30 cm foot (see span_measurements.csv); other fields still to fill
+bridge05,,,,22.8,,,,,,span = inner-inner paced 30 cm foot (see span_measurements.csv); other fields still to fill
+bridge06,,,,25.55,,,,,,span = inner-inner paced 30 cm foot (see span_measurements.csv); other fields still to fill

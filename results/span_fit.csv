@@ -1,0 +1,2 @@
+analysed_at,code_version,n_bridges,bridges,slope,ci95_low,ci95_high,r2
+2026-11-10T12:40:23,ee278d2,6,bridge01 bridge02 bridge03 bridge04 bridge05 bridge06,-1.192,-1.632,-0.753,0.9342
