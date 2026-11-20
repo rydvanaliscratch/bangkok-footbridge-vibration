@@ -20,6 +20,8 @@ Two questions:
    vertically in the 1–3 Hz band. Do any measured overpasses fall in that range?
 2. **Period context.** Bangkok's deep soft-clay basin amplifies long-period ground
    motion. Where do these short, stiff structures sit relative to that band?
+   (Background only: this study measured the bridges, not the basin, so it gives no result
+   on this question.)
 
 ## Results (six concrete pedestrian overpasses in Bangkok)
 
@@ -99,8 +101,8 @@ docs/               Operating guide, build log, protocol
 1. Wire as above, open `firmware/logger/logger.ino` in the Arduino IDE, upload.
 2. Open Serial Monitor at 115200. Confirm `WHO_AM_I ok`.
 3. Run the bench gates in `docs/` before any field measurement.
-4. Capture to CSV: `python3 analysis/capture.py SITE RUN SECONDS [LABEL]`.
-5. Install the libraries once: `python3 -m pip install -r requirements.txt`.
+4. Install the libraries once: `python3 -m pip install -r requirements.txt`.
+5. Capture to CSV: `python3 analysis/capture.py SITE RUN SECONDS [LABEL]`.
 6. Analyse one bridge: `python3 analysis/analyse_bridge.py bridge05 --axis x`. The program
    picks the newest file of each type by label, so for bridges with several recordings pass the
    file explicitly, e.g. `--ambient data/raw/<file> --decay data/raw/<file>`.

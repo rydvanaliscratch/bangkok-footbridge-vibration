@@ -1,6 +1,6 @@
 # Literature notes (working file, 16 Nov 2026)
 
-Status key: READ = Rydvan read it himself; ABSTRACT = only the abstract was seen; NOT READ.
+Status key: READ = Rydvanali read it himself; ABSTRACT = only the abstract was seen; NOT READ.
 Nothing here is cited in the paper until it is marked READ and checked against the original.
 
 ## Closest to this study
@@ -9,12 +9,12 @@ Nothing here is cited in the paper until it is marked READ and checked against t
 |---|---|---|
 | Yoon, Do, Ryu, Ju (2014), Vibration measurements of steel foot-bridges using mobile-phone, Applied Mechanics and Materials 470, 777-780, DOI 10.4028/www.scientific.net/AMM.470.777 | 30 steel footbridges in Seoul, phone measurements, jump tests, regression formulas for natural frequency, compared with the Seoul guideline and Bachmann's curve | ABSTRACT (full text paywalled; authors may be emailed) |
 | Wang et al. (2015), Ambient Vibration Survey and Vibration Serviceability Evaluation on Footbridges, CMFE-15, DOI 10.2991/cmfe-15.2015.127 | 37 footbridges in Beijing, ambient surveys, frequency by peak-picking, damping by half-power bandwidth; bridges under 3 Hz fail serviceability, 3-5 Hz generally pass, over 5 Hz easily pass | ABSTRACT |
-| Wang et al. (2023), Vibration Analysis of Low Height-to-Span Ratio Pedestrian Bridge under Human-Induced Excitation, Advances in Civil Engineering 2023, DOI 10.1155/2023/5515450 | one steel-pier pedestrian bridge: ambient, heel-drop and walking tests plus a finite-element model | READ (Rydvan, 16 Nov) |
+| Wang et al. (2023), Vibration Analysis of Low Height-to-Span Ratio Pedestrian Bridge under Human-Induced Excitation, Advances in Civil Engineering 2023, DOI 10.1155/2023/5515450 | one steel-pier pedestrian bridge: ambient, heel-drop and walking tests plus a finite-element model | READ (Rydvanali, 16 Nov) |
 
-### Rydvan's reading of Wang et al. (2023) (his words, summarised; not verified by Claude beyond the checks below)
+### Rydvanali's reading of Wang et al. (2023) (his words, summarised; not verified by Claude beyond the checks below)
 - Heel-drop: a person lifts the heels about 80 mm and drops onto a force plate (AISC Design Guide 11 procedure); accelerometers placed across the deck.
 - Frequency by FFT; fundamental frequency 3.35 Hz; heel-drop and walking responses reflected each other.
-- Damping by half-power bandwidth, (f2 - f1) / (2 f0). Rydvan noted a ratio below 5%.
+- Damping by half-power bandwidth, (f2 - f1) / (2 f0). Rydvanali noted a ratio below 5%.
 - 30 minutes of measurement. No clear limitations section found.
 - Checked by Claude against the full text on 16 Nov (summary from a web reader, to be confirmed in the paper): three consecutive heel-drops at mid-span and at quarter-span, 15 s apart; heel-drop and walking tests gave 3.35 Hz, and an ambient run of 30 minutes (random subspace identification) also gave 3.35 Hz with damping 0.018; the authors call heel-drop loading a more suitable method for the vertical fundamental frequency; five participants; no dedicated limitations section.
 - Difference from this study: they use the half-power bandwidth for damping; this study uses the log decrement of heel-drop decays.
