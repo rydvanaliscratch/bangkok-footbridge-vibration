@@ -36,11 +36,11 @@ frequency on a ground control; the rule, fixed on 14 Oct before any data, is at 
 | bridge02 | 16.80 | 4.741 | 4.724-4.761 | 33.2x | 1.20 |
 | bridge03 | 24.25 | 3.339 | 3.334-3.350 | **8.1x (below the rule: unconfirmed)** | 0.80 |
 | bridge04 | 25.73 | 3.158 | 3.154-3.162 | 32.0x | 0.46 and 0.54 (single drops) |
-| bridge05 | 22.80 | 3.315 | 3.306-3.328 | 46.3x | 0.66 |
+| bridge05 | 22.80 | 3.315 | 3.306-3.328 | 46.3x | 0.66 and 0.73 (two decays) |
 | bridge06 | 25.55 | 2.977 | 2.973-2.987 | 39.7x | not measurable |
 
 Span fit, log f against log L (6 bridges): slope -1.19, 95% range -1.63 to -0.75, R2 0.93.
-The pre-registered predictions (`predictions/predictions_20261014.md`, written before any
+The sealed predictions (`predictions/predictions_20261014.md`, written before any
 recording) assumed depth proportional to span, which gives a slope near -1.
 
 ## Limits you should know about

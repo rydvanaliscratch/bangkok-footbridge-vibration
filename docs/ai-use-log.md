@@ -39,6 +39,7 @@ Rydvanali checks every line before it is committed. All lines were checked by Ry
 | From 17 Nov 2026 | Claude | Paper: outlines and facts per section; grammar fixes and small connecting phrases in Rydvanali's text, each shown to him | Rydvanali approves every change |
 | 20 Nov 2026 | Claude | Built Tables 1 and 2 from results/; recounted the old detection rule's drop counts per decay file (scratch copy); calculated the span-fit slope without bridge03 (-1.21, 95% range -1.80 to -0.62) in a scratch copy, because span_fit.py cannot leave out a bridge (the sensitivity fit was decided by Rydvanali before his official run on 10 Nov) | Rydvanali ran the official damping run on the 31 Oct file (same result as the preview); the without-bridge03 slope is not from an official run |
 | 21-24 Nov 2026 | Claude | Discussion: averaged the per-drop ringing frequencies (f_ring_hz) from the official runs in results/damping.csv (bridge05 3.31 Hz, bridge02 4.76 Hz, bridge03 3.33 Hz) for the decay-vs-ambient comparison; grammar fixes, fact fixes and two honesty fixes in Rydvanali's Discussion text, each shown to him | Rydvanali approved every change (24 Nov) |
+| 25 Nov 2026 | Claude | Wrote `analysis/paper_figures.py` and made Figures 1 and 2 of the paper from the official results (checked against results/: bridge05 peak 3.315 Hz, ground ratio 46.3; span-fit slope -1.19, R2 0.93) | Rydvanali approved (25 Nov) |
 | | | | |
 
 ## Who did what
