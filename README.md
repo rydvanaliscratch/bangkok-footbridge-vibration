@@ -107,6 +107,14 @@ docs/               Operating guide, build log, protocol
    picks the newest file of each type by label, so for bridges with several recordings pass the
    file explicitly, e.g. `--ambient data/raw/<file> --decay data/raw/<file>`.
 7. Span fit: `python3 analysis/span_fit.py` (reads `data/bridges.csv` and `results/frequencies.csv`).
+8. Paper figures: `python3 analysis/paper_figures.py figures/paper`.
+
+Notes for anyone rerunning the analysis:
+- bridge01, decay of 20 Oct 15:10: `damping.py` reports 8 detections, 7 usable, mean 0.64 %. The paper
+  reports 0.60 % from 5 drops, because two detections (57.3 s and 224.7 s) did not fit the drop record
+  from the field (six drops with pauses after drops 1, 2 and 4); see `docs/build-log.md`, 10 Nov.
+- `data/sessions.csv` is an unused template: the field notes (conditions, drop schedules, problems)
+  were recorded in `docs/build-log.md` instead.
 
 ## Data format
 

@@ -12,6 +12,7 @@ import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 plt.rcParams.update({"font.family": "serif", "font.size": 11})
 out = Path(sys.argv[1])
+out.mkdir(parents=True, exist_ok=True)   # create the output folder if it does not exist
 
 # Figure 1: bridge05 ambient vs ground control
 amb = "data/raw/20261026_0644_bridge05_ambient.csv"
